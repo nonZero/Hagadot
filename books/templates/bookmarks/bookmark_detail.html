@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a
+                    href="{% url "bookmarks:list" %}">{% trans "Text" %}</a>
+            </li>
+            {% for parent in object.get_ancestors %}
+                <li class="breadcrumb-item"
+                    aria-current="page">{{ parent }}</li>
+            {% endfor %}
+            <li class="breadcrumb-item active"
+                aria-current="page">{{ object }}</li>
+        </ol>
+    </nav>
+    <h1>{{ object }}</h1>
+    {{ object.content_html }}
+
+{% endblock %}

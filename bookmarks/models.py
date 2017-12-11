@@ -1,5 +1,6 @@
 import json
 from django.db import models
+from django.urls import reverse
 from django.utils.html import linebreaks
 from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
@@ -25,6 +26,9 @@ class Bookmark(MPTTModel):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('bookmarks:detail', args=[str(self.id)])
 
     def content_text(self):
         if not self.content_json:

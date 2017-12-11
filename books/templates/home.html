@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n mptt_tags %}
+{% block content %}
+
+    <h1>{% trans "Text" %}</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="{% url 'books:list' %}">{% trans "Books" %}</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'bookmarks:list' %}">{% trans "Text" %}</a>
+        </li>
+    </ul>
+{% endblock %}
