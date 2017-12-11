@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a
+                    href="{% url "books:list" %}">{% trans "Books" %}</a></li>
+            <li class="breadcrumb-item">{{ object.book }}</li>
+            <li class="breadcrumb-item active"
+                aria-current="page">{% trans "Page" %} {{ object.ordinal }}</li>
+        </ol>
+    </nav>
+    <h1>{{ object.book }}: {% trans "Page" %} {{ object.ordinal }}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-thumbnail" src="{{ object.preview_url }}"
+                 title="{{ object.ordinal }}">
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                {% for bm in object.bookmarks.all %}
+                    <li class="list-group-item">
+                        {{ bm.title }}
+                        {{ bm.content_html }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+{% endblock %}

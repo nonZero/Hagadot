@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-11 19:28+0200\n"
-"PO-Revision-Date: 2017-12-11 19:28+0200\n"
+"POT-Creation-Date: 2017-12-11 21:27+0200\n"
+"PO-Revision-Date: 2017-12-11 21:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -23,3 +23,12 @@ msgstr "אתר ההגדות והפיוטים"
 
 msgid "Books"
 msgstr "ספרים"
+
+msgid "Text"
+msgstr "טקסט"
+
+msgid "Page"
+msgstr "עמוד"
+
+msgid "Home"
+msgstr "בית"

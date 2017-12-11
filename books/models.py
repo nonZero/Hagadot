@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from mptt.fields import TreeManyToManyField
 
+from bookmarks.models import Bookmark
 from books.nli_api import get_img_url, get_thumb_url
 
 
@@ -26,6 +28,8 @@ class Page(models.Model):
     height = models.PositiveIntegerField()
     width = models.PositiveIntegerField()
 
+    bookmarks = TreeManyToManyField(Bookmark, blank=True, related_name='pages')
+
     class Meta:
         unique_together = (
             ('book', 'ordinal'),
@@ -37,6 +41,9 @@ class Page(models.Model):
 
     def __str__(self):
         return f"{self.book} [#{self.ordinal}]"
+
+    def get_absolute_url(self):
+        return reverse('books:page', args=(self.book_id, self.ordinal))
 
     def preview_url(self):
         return get_img_url(self.img_id)
