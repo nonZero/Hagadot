@@ -18,7 +18,7 @@ python manage.py import_book PNX_MANUSCRIPTS000041407
 python manage.py import_book PNX_MANUSCRIPTS000041667-2
 ```
 
-# Load haggada text
+## Load haggada text
 ```
 python manage.py import_bookmarks
 ```
