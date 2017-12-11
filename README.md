@@ -1,18 +1,18 @@
-🎶📖📑🕮 Haggadot 🕮📑📖🎶
+# 🎶📖📑🕮 Haggadot 🕮📑📖🎶
 
-👷🚧 WIP 🚧👷
+## 👷🚧 WIP 🚧👷
 
-# Prerequisites:
+## Prerequisites:
 
 * Python 3.6
 * pipenv
 
-# Setup
+## Setup
 * Clone repo
 * `pipenv install`
 * `python manage.py migrate`
 
-# Load some books
+## Load some books
 ```
 python manage.py import_book PNX_MANUSCRIPTS000041407
 python manage.py import_book PNX_MANUSCRIPTS000041667-2
@@ -23,6 +23,9 @@ python manage.py import_book PNX_MANUSCRIPTS000041667-2
 python manage.py import_bookmarks
 ```
 
-# Run server
+## Run server
 * `python manage.py runserver`
 * Enjoy: <http://localhost:8000/>
+
+# Credits
+* Haggada text from Sefaria/daat: <http://eph.sefaria.org/Pesach_Haggadah?lang=he>
