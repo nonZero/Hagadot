@@ -1,7 +1,12 @@
-<h1>{{ object }}</h1>
-{% for p in object.pages.all %}
-    <a href="{{ p.preview_url }}"><img src="{{ p.thumb_url }}"
-                                       title="{{ p.ordinal }}"
-                                       height="{{ p.THUMB_HEIGHT }}"
-                                       width="{{ p.thumb_width }}"></a>
-{% endfor %}
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>{{ object }}</h1>
+    {% for p in object.pages.all %}
+        <a href="{{ p.preview_url }}"><img src="{{ p.thumb_url }}"
+                                           title="{{ p.ordinal }}"
+                                           height="{{ p.THUMB_HEIGHT }}"
+                                           width="{{ p.thumb_width }}"></a>
+    {% endfor %}
+
+{% endblock %}
