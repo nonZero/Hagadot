@@ -1,9 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "books:list" %}">{% trans "Books" %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ object }}</li>
+        </ol>
+    </nav>
     <h1>{{ object }}</h1>
     {% for p in object.pages.all %}
-        <a href="{{ p.preview_url }}"><img src="{{ p.thumb_url }}"
+        <a href="{{ p.preview_url }}"><img class="img-thumbnail"
+                                           src="{{ p.thumb_url }}"
                                            title="{{ p.ordinal }}"
                                            height="{{ p.THUMB_HEIGHT }}"
                                            width="{{ p.thumb_width }}"></a>

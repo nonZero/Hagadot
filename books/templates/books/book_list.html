@@ -1,12 +1,20 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 
-    <ul>
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item "><a href="{% url "books:list" %}">{% trans "Books" %}</a></li>
+        </ol>
+    </nav>
+
+    <h1>{% trans "Books" %}</h1>
+
+    <ul class="list-group">
         {% for object in object_list %}
-            <li>
+            <li class="list-group-item">
                 <a href="{{ object.get_absolute_url }}">{{ object }}</a>
             </li>
         {% endfor %}
     </ul>
-
 {% endblock %}
