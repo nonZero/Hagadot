@@ -1,30 +1,35 @@
+import logging
+
 import requests
 
-MANIFEST_URL = "http://iiif.nli.org.il/IIIFv21/DOCID/{}/manifest"
+logger = logging.getLogger(__name__)
 
-# http://iiif.nli.org.il/imageapi.html
-IMG_API_URL = "http://iiif.nli.org.il/IIIFv21/"
+# Docs: http://iiif.nli.org.il/imageapi.html
+API_ENDPOINT = "http://iiif.nli.org.il/IIIFv21/"
 
-IMG_URL = "http://iiif.nli.org.il/IIIFv21/{id}/{region}/{size}/{rotation}/default.jpg"
+MANIFEST_URL = API_ENDPOINT + "DOCID/{}/manifest"
+IMG_URL = API_ENDPOINT + "{id}/{region}/{size}/{rotation}/default.jpg"
 
 
 def get_manifest(doc_id):
-    r = requests.get(MANIFEST_URL.format(doc_id))
+    url = MANIFEST_URL.format(doc_id)
+    logger.debug(f"Getting {url}")
+    r = requests.get(url)
     r.raise_for_status()
     return r.json()
 
 
 def get_pages_from_manifest(doc):
     seqs = doc['sequences']
-    # assert len(seqs) == 1, len(seqs)
+    assert len(seqs) == 1, len(seqs)
     for i, c in enumerate(seqs[0]['canvases']):
-        assert c['@id'].startswith(IMG_API_URL)
+        assert c['@id'].startswith(API_ENDPOINT)
         imgs = c['images']
         assert (len(imgs)) == 1
         yield {
             'ordinal': i + 1,
             'label': c['label'],
-            'id': c['@id'][len(IMG_API_URL):],
+            'id': c['@id'][len(API_ENDPOINT):],
             'height': c['height'],
             'width': c['width'],
         }

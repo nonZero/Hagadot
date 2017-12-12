@@ -4,7 +4,8 @@
 
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item "><a href="{% url "books:list" %}">{% trans "Books" %}</a></li>
+            <li class="breadcrumb-item "><a
+                    href="{% url "books:list" %}">{% trans "Books" %}</a></li>
         </ol>
     </nav>
 
@@ -14,6 +15,7 @@
         {% for object in object_list %}
             <li class="list-group-item">
                 <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                ({{ object.num_pages }})
             </li>
         {% endfor %}
     </ul>

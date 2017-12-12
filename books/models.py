@@ -11,6 +11,8 @@ class Book(models.Model):
     slug = models.CharField(max_length=100, unique=True)
     doc_id = models.CharField(max_length=100, unique=True)
 
+    num_pages = models.PositiveIntegerField(null=True)
+
     def __str__(self):
         return self.title
 
@@ -42,8 +44,8 @@ class Page(models.Model):
     def __str__(self):
         return f"{self.book} [#{self.ordinal}]"
 
-    def get_absolute_url(self):
-        return reverse('books:page', args=(self.book_id, self.ordinal))
+    def get_absolute_url(self, d=0):
+        return reverse('books:page', args=(self.book_id, self.ordinal + d))
 
     def preview_url(self):
         return get_img_url(self.img_id)
@@ -53,3 +55,15 @@ class Page(models.Model):
 
     def thumb_width(self):
         return int(self.THUMB_HEIGHT / self.height * self.width)
+
+    def is_first(self):
+        return self.ordinal == self.book.num_pages
+
+    def is_last(self):
+        return self.ordinal == self.book.num_pages
+
+    def prev_page_url(self):
+        return self.get_absolute_url(-1)
+
+    def next_page_url(self):
+        return self.get_absolute_url(1)
