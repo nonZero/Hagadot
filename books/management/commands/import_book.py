@@ -1,9 +1,12 @@
+import logging
+
 from django.core.management import CommandError
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from books import nli_api
 from books.models import Book
+from books.nli_api import fix_pages
 
 
 class Command(BaseCommand):
@@ -13,8 +16,11 @@ class Command(BaseCommand):
         parser.add_argument('doc_id')
 
     def handle(self, doc_id, **options):
+        if options['verbosity'] >= 2:
+            logging.basicConfig(level=logging.DEBUG)
         doc = nli_api.get_manifest(doc_id)
-        pages = list(nli_api.get_pages_from_manifest(doc))
+        pages = nli_api.get_pages_from_manifest(doc)
+        pages = list(fix_pages(pages))
         if len(pages) == 0:
             raise CommandError("No pages found for doc.")
 

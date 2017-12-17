@@ -21,18 +21,34 @@ def get_manifest(doc_id):
 
 def get_pages_from_manifest(doc):
     seqs = doc['sequences']
-    assert len(seqs) == 1, len(seqs)
-    for i, c in enumerate(seqs[0]['canvases']):
-        assert c['@id'].startswith(API_ENDPOINT)
-        imgs = c['images']
-        assert (len(imgs)) == 1
-        yield {
-            'ordinal': i + 1,
-            'label': c['label'],
-            'id': c['@id'][len(API_ENDPOINT):],
-            'height': c['height'],
-            'width': c['width'],
-        }
+    for i, seq in enumerate(seqs):
+        if i > 0 and 'canvases' not in seq:
+            # fetch full sequence data
+            url = seq['@id']
+            logger.debug(f"Getting sequence {url}")
+            seq = requests.get(url).json()
+        for c in seq['canvases']:
+            assert c['@id'].startswith(API_ENDPOINT)
+            imgs = c['images']
+            assert (len(imgs)) == 1
+            yield {
+                'label': c['label'],
+                'id': c['@id'][len(API_ENDPOINT):],
+                'height': c['height'],
+                'width': c['width'],
+            }
+
+
+def fix_pages(pages):
+    """remove pdfs and add ordinals"""
+    i = 1
+    for p in pages:
+        if p['height'] < 20 or p['width'] < 20:
+            # PDF, skip
+            logger.warning(f"Dropped page @id {p['id']}")
+            continue
+        yield dict(ordinal=i, **p)
+        i += 1
 
 
 def get_img_url(img_id, region='full', size='max', rotation='0'):
