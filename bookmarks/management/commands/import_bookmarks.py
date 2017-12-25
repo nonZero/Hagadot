@@ -35,7 +35,7 @@ class Command(BaseCommand):
     help = "Load haggadah bookmarks and text."
 
     def handle(self, *args, **options):
-        with (Path(settings.BASE_DIR) / "data/haggadah.json").open() as f:
+        with (Path(settings.BASE_DIR) / "data/haggadah.json").open(encoding="UTF-8") as f:
             data = json.load(f)
         with transaction.atomic():
             walk(data['text'], data['schema'])
