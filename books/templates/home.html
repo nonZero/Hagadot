@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% load i18n mptt_tags %}
+
+{% block page_title %}
+    {% trans "Home" %}
+{% endblock %}
+
 {% block content %}
 
     <h1>{% trans "Home" %}</h1>

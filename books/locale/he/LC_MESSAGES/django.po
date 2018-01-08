@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-11 21:27+0200\n"
-"PO-Revision-Date: 2017-12-11 21:27+0200\n"
+"POT-Creation-Date: 2018-01-08 08:13+0200\n"
+"PO-Revision-Date: 2018-01-08 08:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -16,7 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.5\n"
+
+msgid "Invalid range"
+msgstr "לא תקין"
+
+msgid "404 Not Found"
+msgstr "404 הדף לא קיים"
+
+msgid "Home"
+msgstr "בית"
+
+msgid "Hagadot website"
+msgstr "אתר ההגדות והפיוטים"
 
 msgid "Haggadot and Piyutim"
 msgstr "אתר ההגדות והפיוטים"
@@ -27,8 +39,17 @@ msgstr "ספרים"
 msgid "Text"
 msgstr "טקסט"
 
+msgid "Bookmarks"
+msgstr "סימניות"
+
 msgid "Page"
 msgstr "עמוד"
 
-msgid "Home"
-msgstr "בית"
+msgid "Save"
+msgstr "שמירה"
+
+msgid "Start"
+msgstr "התחלה"
+
+msgid "End"
+msgstr "סוף"

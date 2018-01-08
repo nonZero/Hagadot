@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 {% load i18n mptt_tags %}
+
+{% block page_title %}
+    {% trans "Bookmarks" %}
+{% endblock %}
+
 {% block content %}
 
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item "><a
-                    href="{% url "bookmarks:list" %}">{% trans "Bookmarks" %}</a></li>
+                    href="{% url "bookmarks:list" %}">{% trans "Bookmarks" %}</a>
+            </li>
         </ol>
     </nav>
 

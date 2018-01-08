@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% load i18n staticfiles %}
+
+{% block page_title %}
+    {{ object.book }}: {% trans "Page" %} {{ object.ordinal }}
+{% endblock %}
+
+
 {% block content %}
 
     <nav aria-label="breadcrumb" role="navigation">

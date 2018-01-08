@@ -12,7 +12,9 @@ django-extensions = "*"
 ipython = "*"
 requests = "*"
 django-mptt = "*"
+"psycopg2" = "*"
 
 
 [dev-packages]
 
+"fabric3" = "*"

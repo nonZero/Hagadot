@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
+
+{% block page_title %}
+    {{ object }}
+{% endblock %}
+
 {% block content %}
 
     <nav aria-label="breadcrumb" role="navigation">

@@ -9,7 +9,11 @@ class PageInline(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
     inlines = (
-        PageInline,
+        # PageInline,
+    )
+    readonly_fields = (
+        'doc_id',
+        'num_pages',
     )
 
 
