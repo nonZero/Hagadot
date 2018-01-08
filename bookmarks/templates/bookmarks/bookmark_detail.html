@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a
-                    href="{% url "bookmarks:list" %}">{% trans "Text" %}</a>
+                    href="{% url "bookmarks:list" %}">{% trans "Bookmarks" %}</a>
             </li>
             {% for parent in object.get_ancestors %}
                 <li class="breadcrumb-item"
@@ -16,6 +16,13 @@
         </ol>
     </nav>
     <h1>{{ object }}</h1>
-    {{ object.content_html }}
+    <ul class="list-unstyled">
+        {% for row in object.rows.all %}
+            <li>
+                {{ row.content|safe }}
+                <span class="badge badge-pill badge-info">{{ row.ordinal }}</span>
+            </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}

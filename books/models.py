@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from mptt.fields import TreeManyToManyField
 
-from bookmarks.models import Bookmark
+from bookmarks.models import Bookmark, Row
 from books.nli_api import get_img_url, get_thumb_url
 
 
@@ -30,7 +30,7 @@ class Page(models.Model):
     height = models.PositiveIntegerField()
     width = models.PositiveIntegerField()
 
-    bookmarks = TreeManyToManyField(Bookmark, blank=True, related_name='pages')
+    rows = models.ManyToManyField(Row, blank=True, related_name='pages')
 
     class Meta:
         unique_together = (
@@ -57,7 +57,7 @@ class Page(models.Model):
         return int(self.THUMB_HEIGHT / self.height * self.width)
 
     def is_first(self):
-        return self.ordinal == self.book.num_pages
+        return self.ordinal == 1
 
     def is_last(self):
         return self.ordinal == self.book.num_pages

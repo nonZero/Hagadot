@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n mptt_tags %}
+{% block content %}
+
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item "><a
+                    href="{% url "bookmarks:all" %}">{% trans "Text" %}</a></li>
+        </ol>
+    </nav>
+
+    <h1>{% trans "Text" %}</h1>
+
+    <ul class="tree list-unstyled">
+    {% for object in object_list %}
+        <li>
+            {{ object.content|safe }}
+        </li>
+    {% endfor %}
+
+    </ul>
+{% endblock %}

@@ -1,8 +1,15 @@
 from django import forms
-from mptt.forms import TreeNodeChoiceField
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
-from bookmarks.models import Bookmark
 
+class RowsRangeForm(forms.Form):
+    start = forms.IntegerField(min_value=1)
+    end = forms.IntegerField(min_value=1)
 
-class AddBookmarkForm(forms.Form):
-    bookmark = TreeNodeChoiceField(Bookmark.objects.all())
+    def clean(self):
+        data = super().clean()
+        if 'start' in data and 'end' in data:
+            if not data['start'] <= data['end']:
+                raise ValidationError(_("Invalid range"))
+        return data

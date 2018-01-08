@@ -1,8 +1,5 @@
-import json
 from django.db import models
 from django.urls import reverse
-from django.utils.html import linebreaks
-from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
@@ -14,7 +11,6 @@ class Bookmark(MPTTModel):
 
     ordinal = models.IntegerField()
     title = models.CharField(max_length=300)
-    content_json = models.TextField(null=True)
 
     class Meta:
         unique_together = (
@@ -30,12 +26,20 @@ class Bookmark(MPTTModel):
     def get_absolute_url(self):
         return reverse('bookmarks:detail', args=[str(self.id)])
 
-    def content_text(self):
-        if not self.content_json:
-            return ""
-        return "\n".join(json.loads(self.content_json))
 
-    def content_html(self):
-        return mark_safe(linebreaks(self.content_text()))
+class Row(models.Model):
+    bookmark = models.ForeignKey(Bookmark, on_delete=models.CASCADE,
+                                 related_name='rows')
+    ordinal = models.IntegerField(unique=True)
+    content = models.TextField()
 
+    def __str__(self):
+        return f"{self.ordinal} {self.bookmark}"
 
+    # def get_absolute_url(self):
+    #     return reverse('bookmarks:detail', args=[str(self.id)])
+
+    class Meta:
+        ordering = (
+            "ordinal",
+        )

@@ -5,11 +5,11 @@
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item "><a
-                    href="{% url "books:list" %}">{% trans "Text" %}</a></li>
+                    href="{% url "bookmarks:list" %}">{% trans "Bookmarks" %}</a></li>
         </ol>
     </nav>
 
-    <h1>{% trans "Text" %}</h1>
+    <h1>{% trans "Bookmarks" %}</h1>
 
     <ul class="tree list-unstyled">
         {% recursetree object_list %}

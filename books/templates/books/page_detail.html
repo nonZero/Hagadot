@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n staticfiles %}
 {% block content %}
 
     <nav aria-label="breadcrumb" role="navigation">
@@ -42,24 +42,52 @@
                  title="{{ object.ordinal }}">
         </div>
         <div class="col-md-6">
-            <ul class="list-group">
-                {% for bm in object.bookmarks.all %}
+            <form method="post" class="save-page">
+                <ul class="list-group">
+                    {% if view.errors %}
+                        <li class="list-group-item">
+                            {{ view.errors }}
+                        </li>
+
+                    {% endif %}
                     <li class="list-group-item">
-                        {{ bm.title }}
-                        {{ bm.content_html }}
-                    </li>
-                {% endfor %}
-                <li class="list-group-item">
-                    <form method="post">
                         {% csrf_token %}
-                        {{ view.form }}
-                        <button class="btn btn-success btn-sm">Add</button>
-                    </form>
-                </li>
-            </ul>
+                        <button class="btn btn-primary btn-sm">{% trans "Save" %}</button>
+                        <button name="continue" value="next"
+                                class="btn btn-primary btn-sm">{% trans "Save" %}
+                            &raquo;
+                        </button>
+                    </li>
+                    {% for row in rows %}
+                        <li class="list-group-item" data-id="{{ row.ordinal }}"
+                            title="{{ row.ordinal }}">
+                            <input type="radio" required name="start"
+                                   class="radio-start"
+                                   value="{{ row.ordinal }}"
+                                   title="{% trans "Start" %}"
+                                    {% if row.ordinal == start_row.ordinal %}
+                                   checked="1" {% endif %}
+                            >
+                            <input type="radio" required name="end"
+                                   class="radio-end"
+                                   value="{{ row.ordinal }}"
+                                   title="{% trans "End" %}"
+                                    {% if row.ordinal == end_row.ordinal %}
+                                   checked="1" {% endif %}
+                            >
+                            {{ row.content|safe }}
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </form>
 
         </div>
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "js/page_detail.js" %}"></script>
 
 {% endblock %}

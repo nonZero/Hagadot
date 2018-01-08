@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from bookmarks.models import Bookmark
+from bookmarks.models import Bookmark, Row
 
 
 def walk(texts, node, i=0, parent=None, path=None):
@@ -13,22 +13,27 @@ def walk(texts, node, i=0, parent=None, path=None):
         path = path or []
     indent = len(path)
     print('-', indent * "  ", node['enTitle'])
-    text = None
-    if 'nodes' not in node:
-        d = texts
-        for k in path:
-            d = d[k]
-        text = json.dumps(d)
-
     parent = Bookmark.objects.create(
         parent=parent,
         ordinal=i,
         title=node['heTitle'],
-        content_json=text,
     )
+    i += 1
     if 'nodes' in node:
-        for i, n in enumerate(node['nodes']):
-            walk(texts, n, i, parent, path + [n['enTitle']])
+        for n in node['nodes']:
+            i = walk(texts, n, i, parent, path + [n['enTitle']])
+    else:
+        d = texts
+        for k in path:
+            d = d[k]
+        for row in d:
+            Row.objects.create(
+                bookmark=parent,
+                ordinal=i,
+                content=row,
+            )
+            i += 1
+    return i
 
 
 class Command(BaseCommand):

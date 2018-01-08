@@ -9,3 +9,7 @@ class BookmarkListView(ListView):
 
 class BookmarkDetailView(DetailView):
     model = models.Bookmark
+
+
+class RowListView(ListView):
+    model = models.Row

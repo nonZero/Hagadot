@@ -9,10 +9,11 @@ class BookmarkAdmin(MPTTModelAdmin):
         'parent',
         'ordinal',
         'title',
-        'content_html',
     )
     readonly_fields = (
-        'content_html',
+        'parent',
+        'ordinal',
+        'title',
     )
 
 
