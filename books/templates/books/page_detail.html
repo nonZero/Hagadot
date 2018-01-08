@@ -42,45 +42,55 @@
                  title="{{ object.ordinal }}">
         </div>
         <div class="col-md-6">
-            <form method="post" class="save-page">
-                <ul class="list-group">
-                    {% if view.errors %}
+            {% if perms.books.change_book %}
+                <form method="post" class="save-page">
+                    <ul class="list-group">
+                        {% if view.errors %}
+                            <li class="list-group-item">
+                                {{ view.errors }}
+                            </li>
+
+                        {% endif %}
                         <li class="list-group-item">
-                            {{ view.errors }}
+                            {% csrf_token %}
+                            <button class="btn btn-primary btn-sm">{% trans "Save" %}</button>
+                            <button name="continue" value="next"
+                                    class="btn btn-primary btn-sm">{% trans "Save" %}
+                                &raquo;
+                            </button>
                         </li>
+                        {% for row in rows %}
+                            <li class="list-group-item"
+                                data-id="{{ row.ordinal }}"
+                                title="{{ row.ordinal }}">
+                                <input type="radio" required name="start"
+                                       class="radio-start"
+                                       value="{{ row.ordinal }}"
+                                       title="{% trans "Start" %}"
+                                        {% if row.ordinal == start_row.ordinal %}
+                                       checked="1" {% endif %}
+                                >
+                                <input type="radio" required name="end"
+                                       class="radio-end"
+                                       value="{{ row.ordinal }}"
+                                       title="{% trans "End" %}"
+                                        {% if row.ordinal == end_row.ordinal %}
+                                       checked="1" {% endif %}
+                                >
+                                {{ row.content|safe }}
+                            </li>
+                        {% endfor %}
 
-                    {% endif %}
+                    </ul>
+                </form>
+            {% else %}
+                {% for row in object.rows.all %}
                     <li class="list-group-item">
-                        {% csrf_token %}
-                        <button class="btn btn-primary btn-sm">{% trans "Save" %}</button>
-                        <button name="continue" value="next"
-                                class="btn btn-primary btn-sm">{% trans "Save" %}
-                            &raquo;
-                        </button>
+                    {{ row.content|safe }}
                     </li>
-                    {% for row in rows %}
-                        <li class="list-group-item" data-id="{{ row.ordinal }}"
-                            title="{{ row.ordinal }}">
-                            <input type="radio" required name="start"
-                                   class="radio-start"
-                                   value="{{ row.ordinal }}"
-                                   title="{% trans "Start" %}"
-                                    {% if row.ordinal == start_row.ordinal %}
-                                   checked="1" {% endif %}
-                            >
-                            <input type="radio" required name="end"
-                                   class="radio-end"
-                                   value="{{ row.ordinal }}"
-                                   title="{% trans "End" %}"
-                                    {% if row.ordinal == end_row.ordinal %}
-                                   checked="1" {% endif %}
-                            >
-                            {{ row.content|safe }}
-                        </li>
-                    {% endfor %}
 
-                </ul>
-            </form>
+                {% endfor %}
+            {% endif %}
 
         </div>
     </div>

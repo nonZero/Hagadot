@@ -13,24 +13,35 @@
 </head>
 <body>
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url "home" %}">{% trans "Haggadot and Piyutim" %}</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand"
+           href="{% url "home" %}">{% trans "Haggadot and Piyutim" %}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarNav" aria-controls="navbarNav"
+                data-target=".navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url "books:list" %}">{% trans "Books" %}</a>
+                    <a class="nav-link"
+                       href="{% url "books:list" %}">{% trans "Books" %}</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url "bookmarks:all" %}">{% trans "Text" %}</a>
+                    <a class="nav-link"
+                       href="{% url "bookmarks:all" %}">{% trans "Text" %}</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url "bookmarks:list" %}">{% trans "Bookmarks" %}</a>
+                    <a class="nav-link"
+                       href="{% url "bookmarks:list" %}">{% trans "Bookmarks" %}</a>
                 </li>
+                {% if user.is_authenticated %}
+                    <li>
+                    <span class="navbar-text">
+                        {{ user }}
+                    </span>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -39,6 +50,7 @@
 </div>
 
 <script src="{% static "vendor/jquery-3.2.1.js" %}"></script>
+<script src="{% static "vendor/bootstrap/js/bootstrap.bundle.js" %}"></script>
 {% block scripts %}
 {% endblock scripts %}
 
