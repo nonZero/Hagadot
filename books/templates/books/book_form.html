@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n bootstrap4 %}
 
 {% block page_title %}
     {% trans "Edit" %} {{ object }}
@@ -21,10 +21,11 @@
     <h1>{% trans "Edit" %} {{ object }}</h1>
     <form method="post">
         {% csrf_token %}
-        <ul>
-            {{ form.as_ul }}
-        </ul>
-        <button class="btn btn-success">{% trans "Save" %}</button>
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button class="btn btn-success">{% trans "Save" %}</button>
+        {% endbuttons %}
+
     </form>
 
 {% endblock %}

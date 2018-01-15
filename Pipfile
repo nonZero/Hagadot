@@ -13,6 +13,7 @@ ipython = "*"
 requests = "*"
 django-mptt = "*"
 "psycopg2" = "*"
+"django-bootstrap4" = "*"
 
 
 [dev-packages]
