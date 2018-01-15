@@ -1,3 +1,18 @@
 body {
     direction: rtl;
 }
+
+.page-img {
+    display: inline-block;
+    position: relative;
+}
+.page-img .img-thumbnail {
+    padding: 0;
+    border: 0;
+}
+
+.page-img .an {
+    position: absolute;
+}
+
+

@@ -68,3 +68,22 @@ class Page(models.Model):
 
     def next_page_url(self):
         return self.get_absolute_url(1)
+
+
+class Annotation(models.Model):
+    page = models.ForeignKey(Page, on_delete=models.CASCADE,
+                             related_name='annotations')
+    x0 = models.DecimalField(max_digits=5, decimal_places=1)
+    y0 = models.DecimalField(max_digits=5, decimal_places=1)
+    x1 = models.DecimalField(max_digits=5, decimal_places=1)
+    y1 = models.DecimalField(max_digits=5, decimal_places=1)
+    content = models.TextField(_("content"))
+
+    def __str__(self):
+        return f"#{self.page.book.id}:{self.page.id}:{self.id} [{self.x0}%:{self.y0}%] - [{self.x1}%:{self.y1}%]"
+
+    def w(self):
+        return self.x1 - self.x0
+
+    def h(self):
+        return self.y1 - self.y0

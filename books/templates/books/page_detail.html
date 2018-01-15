@@ -44,8 +44,16 @@
     <h1>{{ object.book }}: {% trans "Page" %} {{ object.ordinal }}</h1>
     <div class="row">
         <div class="col-md-6">
-            <img class="img-thumbnail" src="{{ object.preview_url }}"
-                 title="{{ object.ordinal }}">
+            <div class="page-img">
+                <img class="img-thumbnail" src="{{ object.preview_url }}"
+                     title="{{ object.ordinal }}">
+                {% for an in object.annotations.all %}
+                    <div class="an"
+                         style="left:{{ an.x0 }}%; top:{{ an.y0 }}%; width:{{ an.w }}%;  height:{{ an.h }}%; background: red"></div>
+
+                {% endfor %}
+
+            </div>
         </div>
         <div class="col-md-6">
             {% if perms.books.change_book %}
@@ -92,7 +100,7 @@
             {% else %}
                 {% for row in object.rows.all %}
                     <li class="list-group-item">
-                    {{ row.content|safe }}
+                        {{ row.content|safe }}
                     </li>
 
                 {% endfor %}
