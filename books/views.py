@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView, UpdateView
@@ -19,7 +21,8 @@ class BookDetailView(DetailView):
     model = models.Book
 
 
-class BookUpdateView(UpdateView):
+class BookUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = "books.change_book"
     model = models.Book
     fields = (
         'title',

@@ -16,8 +16,11 @@
                 aria-current="page">{{ object }}</li>
         </ol>
     </nav>
-    <a class="btn btn-success float-right"
-       href="{% url "books:update" object.id %}">{% trans "Edit" %}</a>
+    {% if perms.books.change_book %}
+        <a class="btn btn-success float-right"
+           href="{% url "books:update" object.id %}"><span
+                class="fa fa-pencil"></span> {% trans "Edit" %}</a>
+    {% endif %}
     <h1>{{ object }}</h1>
     {% if object.summary %}
         {{ object.summary|linebreaks }}
