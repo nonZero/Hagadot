@@ -1,15 +1,16 @@
 from django.db import models
 from django.urls import reverse
-from mptt.fields import TreeManyToManyField
+from django.utils.translation import ugettext_lazy as _
 
 from bookmarks.models import Bookmark, Row
 from books.nli_api import get_img_url, get_thumb_url
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=300)
+    title = models.CharField(_("title"), max_length=300)
     slug = models.CharField(max_length=100, unique=True)
     doc_id = models.CharField(max_length=100, unique=True)
+    summary = models.TextField(_("summary"), null=True, blank=True)
 
     num_pages = models.PositiveIntegerField(null=True)
 

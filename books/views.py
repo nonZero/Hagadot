@@ -1,6 +1,6 @@
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView
 
 from bookmarks.models import Row
 from books import forms
@@ -17,6 +17,14 @@ class BookListView(ListView):
 
 class BookDetailView(DetailView):
     model = models.Book
+
+
+class BookUpdateView(UpdateView):
+    model = models.Book
+    fields = (
+        'title',
+        'summary',
+    )
 
 
 class PageDetailView(DetailView):
