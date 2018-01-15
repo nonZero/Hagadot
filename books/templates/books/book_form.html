@@ -23,7 +23,7 @@
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button class="btn btn-success">{% trans "Save" %}</button>
+            <button class="btn btn-success"><span class="fa fa-save" aria-hidden="true"></span> {% trans "Save" %}</button>
         {% endbuttons %}
 
     </form>
