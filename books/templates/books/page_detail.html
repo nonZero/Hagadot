@@ -7,7 +7,7 @@
 
 
 {% block content %}
-
+    <dialog style="display: none" id="main-dialog"></dialog>
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a
@@ -49,7 +49,11 @@
                      title="{{ object.ordinal }}">
                 {% for an in object.annotations.all %}
                     <div class="an"
-                         style="left:{{ an.x0 }}%; top:{{ an.y0 }}%; width:{{ an.w }}%;  height:{{ an.h }}%; background: red"></div>
+                         data-id="{{ an.id }}"
+                         style="left:{{ an.x0 }}%; top:{{ an.y0 }}%; width:{{ an.w }}%;  height:{{ an.h }}%; background: red">
+                        <div class="c" hidden>{{ an.content|linebreaks }}</div>
+
+                    </div>
 
                 {% endfor %}
 

@@ -17,16 +17,15 @@ $(function () {
     refresh();
 
     $(".save-page").on('change', 'input', function () {
-        console.log('refresh');
         refresh();
     });
 
-    // $(".save-page").on('submit', function () {
-    //     console.log($(this));
-    //     const start = $(this).find(".radio-start:checked");
-    //     const end = $(this).find(".radio-end:checked");
-    //     return false;
-    // });
+    const mainDialog = $("#main-dialog").click(() => mainDialog.hide().get(0).close());
 
+    $(".page-img").on('click', '.an', function () {
+        const el = $(this);
+        mainDialog.html(el.find(".c").html());
+        mainDialog.show().get(0).showModal();
+    })
 
 });
