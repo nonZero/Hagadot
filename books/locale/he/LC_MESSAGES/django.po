@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-15 10:51+0200\n"
-"PO-Revision-Date: 2018-01-15 10:51+0200\n"
+"POT-Creation-Date: 2018-01-15 17:38+0200\n"
+"PO-Revision-Date: 2018-01-15 17:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -26,6 +26,9 @@ msgstr "כותרת"
 
 msgid "summary"
 msgstr "סיכום"
+
+msgid "content"
+msgstr "תוכן"
 
 msgid "404 Not Found"
 msgstr "404 הדף לא קיים"
@@ -48,6 +51,15 @@ msgstr "טקסט"
 msgid "Bookmarks"
 msgstr "סימניות"
 
+msgid "Edit Annotation"
+msgstr "עריכת אנוטציה"
+
+msgid "Add Annotation"
+msgstr "הוספת אנוטציה"
+
+msgid "Add"
+msgstr "הוספה"
+
 msgid "Edit"
 msgstr "עריכה"
 
@@ -56,6 +68,9 @@ msgstr "שמירה"
 
 msgid "Page"
 msgstr "עמוד"
+
+msgid "Close"
+msgstr "סגירה"
 
 msgid "Start"
 msgstr "התחלה"

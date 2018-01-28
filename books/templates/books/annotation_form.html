@@ -1,0 +1,26 @@
+{% load i18n bootstrap4 %}
+
+<button class="float-right btn btn-light btn-sm close"><span class="fa fa-close"></span></button>
+
+<h1>
+    {% if object %}
+        {% trans "Edit Annotation" %}
+    {% else %}
+        {% trans "Add Annotation" %}
+    {% endif %}
+</h1>
+
+<form method="post" action="{{ request.path }}">
+    {% csrf_token %}
+    {% bootstrap_form_errors form %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button class="btn btn-success"><span class="fa fa-save"
+                                              aria-hidden="true"></span> {% trans "Add" %}
+        </button>
+
+
+    {% endbuttons %}
+
+</form>
+

@@ -1,8 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, TemplateView, UpdateView
+from django.views.generic import ListView, DetailView, TemplateView, \
+    UpdateView, FormView
 
 from bookmarks.models import Row
 from books import forms
@@ -76,3 +76,49 @@ class PageDetailView(DetailView):
             if not o:
                 o = self.get_object()
         return redirect(o)
+
+
+class AnnotationCreateView(FormView):
+    form_class = forms.AnnotationCreateForm
+    template_name = "books/annotation_form.html"
+
+    def form_invalid(self, form):
+        return redirect(form.instance.page)
+
+    def form_valid(self, form):
+        form.instance.page = get_object_or_404(models.Page,
+                                               book_id=self.kwargs['pk'],
+                                               ordinal=self.kwargs['ordinal'])
+        form.instance.save()
+        return redirect(form.instance.page)
+
+
+class AnnotationUpdateView(UpdateView):
+    model = models.Annotation
+    fields = (
+        'content',
+    )
+
+    def get_success_url(self):
+        return self.object.page.get_absolute_url()
+
+    def form_invalid(self, form):
+        return self.form_valid(form)
+
+
+class AnnotationUpdatePositionView(UpdateView):
+    model = models.Annotation
+    fields = (
+        'x0',
+        'y0',
+        'x1',
+        'y1',
+    )
+
+    def form_invalid(self, form):
+        return JsonResponse({'errors': form.errors.get_json_data()},
+                            status=401)
+
+    def form_valid(self, form):
+        form.save()
+        return JsonResponse({})

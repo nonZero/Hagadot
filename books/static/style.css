@@ -2,6 +2,10 @@ body {
     direction: rtl;
 }
 
+dialog {
+    top: 100px;
+}
+
 .page-img {
     display: inline-block;
     position: relative;
@@ -9,10 +13,20 @@ body {
 .page-img .img-thumbnail {
     padding: 0;
     border: 0;
+    border-radius: 0;
 }
 
-.page-img .an {
+.page-img .an, .page-img .marker {
     position: absolute;
+    cursor: pointer;
+    opacity: 0.6;
 }
 
+.page-img .an .handle {
+    cursor: move;
+}
 
+.page-img .marker {
+    display: None;
+    background: blue;
+}

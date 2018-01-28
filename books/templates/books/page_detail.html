@@ -41,7 +41,9 @@
             {% endif %}
         </ul>
     </nav>
+
     <h1>{{ object.book }}: {% trans "Page" %} {{ object.ordinal }}</h1>
+
     <div class="row">
         <div class="col-md-6">
             <div class="page-img">
@@ -49,16 +51,26 @@
                      title="{{ object.ordinal }}">
                 {% for an in object.annotations.all %}
                     <div class="an"
-                         data-id="{{ an.id }}"
+                         data-url="{% url "books:update_ann_pos" an.id %}"
                          style="left:{{ an.x0 }}%; top:{{ an.y0 }}%; width:{{ an.w }}%;  height:{{ an.h }}%; background: red">
-                        <div class="c" hidden>{{ an.content|linebreaks }}</div>
+                        <div class="handle btn btn-light btn-sm"><span class="fa fa-arrows"></span></div>
+                        <div class="c" hidden>
+                            <a href="{% url "books:update_ann" an.id %}"
+                               class="edit-ann btn btn-sm btn-light float-right"><span
+                                    class="fa fa-pencil"></span></a>
+                            {{ an.content|linebreaks }}
+                            <a href="#" class="btn btn-primary close-dialog">{% trans "Close" %}</a>
+                        </div>
 
                     </div>
 
                 {% endfor %}
+                <div class="marker"
+                     data-url="{% url "books:create_ann" object.book.id object.ordinal %}"></div>
 
             </div>
         </div>
+
         <div class="col-md-6">
             {% if perms.books.change_book %}
                 <form method="post" class="save-page">
@@ -116,5 +128,6 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static "csrf.js" %}"></script>
     <script src="{% static "js/page_detail.js" %}"></script>
 {% endblock %}
