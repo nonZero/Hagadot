@@ -4,12 +4,24 @@ body {
 
 dialog {
     top: 100px;
+    min-width: 61%;
 }
 
 .page-img {
     display: inline-block;
     position: relative;
 }
+
+.page-img.add > img {
+    cursor: copy;
+    opacity: 0.8;
+}
+
+.page-img.add:hover > img {
+    opacity: 0.7;
+}
+
+
 .page-img .img-thumbnail {
     padding: 0;
     border: 0;
@@ -17,16 +29,37 @@ dialog {
 }
 
 .page-img .an, .page-img .marker {
+    text-align: center;
+    border: black solid 4px;
+    border-radius: 8px;
     position: absolute;
     cursor: pointer;
-    opacity: 0.6;
+    opacity: 0.3;
+    margin-left: -1.5rem;
+    margin-top: -1.5rem;
+    width: 3rem;
+    height: 3rem;
+    background: blue;
+    color: white;
+    line-height: 3rem;
 }
 
-.page-img .an .handle {
+.page-img .an:hover {
+    opacity: 0.7;
+}
+
+.page-img .an.dragging {
     cursor: move;
+    background: lightblue;
 }
 
 .page-img .marker {
     display: None;
-    background: blue;
+    background: green;
+}
+
+.page-img .add-an {
+}
+
+.page-img.add .add-an {
 }

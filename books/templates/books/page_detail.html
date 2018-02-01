@@ -42,29 +42,53 @@
         </ul>
     </nav>
 
-    <h1>{{ object.book }}: {% trans "Page" %} {{ object.ordinal }}</h1>
+
+    <h1>
+        {{ object.book }}: {% trans "Page" %} {{ object.ordinal }}
+    </h1>
 
     <div class="row">
         <div class="col-md-6">
-            <div class="page-img">
-                <img class="img-thumbnail" src="{{ object.preview_url }}"
-                     title="{{ object.ordinal }}">
+            {% if perms.books.add_annotation %}
+                <p>
+                    <button class="btn btn-success btn-sm add-an"><i
+                            class="fa fa-plus"></i> {% trans "Add Annotation" %}
+                    </button>
+                </p>
+            {% endif %}
+
+            <div class="page-img{% if perms.books.change_annotation %} edit{% endif %}">
+                <img class="img-thumbnail" src="{{ object.preview_url }}">
                 {% for an in object.annotations.all %}
                     <div class="an"
                          data-url="{% url "books:update_ann_pos" an.id %}"
-                         style="left:{{ an.x0 }}%; top:{{ an.y0 }}%; width:{{ an.w }}%;  height:{{ an.h }}%; background: red">
-                        <div class="handle btn btn-light btn-sm"><span class="fa fa-arrows"></span></div>
+                         style="left:{{ an.x }}%; top:{{ an.y }}%;">
+                            <span class="fa fa-search fa-2x"></span>
                         <div class="c" hidden>
-                            <a href="{% url "books:update_ann" an.id %}"
-                               class="edit-ann btn btn-sm btn-light float-right"><span
-                                    class="fa fa-pencil"></span></a>
+                            {% if perms.books.delete_annotation %}
+                                <form action="{% url "books:delete_ann" an.id %}" method="post">
+                                    {% csrf_token %}
+                                <button class="btn btn-sm btn-danger float-right delete"><span
+                                        class="fa fa-trash"></span></button>
+                                </form>
+                            {% endif %}
+                            <span class="float-right">&nbsp;</span>
+                            {% if perms.books.change_annotation %}
+                                <a href="{% url "books:update_ann" an.id %}"
+                                   class="edit-ann btn btn-sm btn-light float-right"><span
+                                        class="fa fa-pencil"></span></a>
+                            {% endif %}
                             {{ an.content|linebreaks }}
-                            <a href="#" class="btn btn-primary close-dialog">{% trans "Close" %}</a>
+
+                            <a href="#"
+                               class="btn btn-primary close-dialog">{% trans "Close" %}</a>
                         </div>
 
                     </div>
 
                 {% endfor %}
+
+
                 <div class="marker"
                      data-url="{% url "books:create_ann" object.book.id object.ordinal %}"></div>
 

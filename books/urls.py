@@ -12,6 +12,8 @@ urlpatterns = [
          views.AnnotationCreateView.as_view(), name='create_ann'),
     path('annotations/edit/<int:pk>/',
          views.AnnotationUpdateView.as_view(), name='update_ann'),
+    path('annotations/delete/<int:pk>/',
+         views.AnnotationDeleteView.as_view(), name='delete_ann'),
     path('annotations/edit-position/<int:pk>/',
          views.AnnotationUpdatePositionView.as_view(), name='update_ann_pos'),
 ]

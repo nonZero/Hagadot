@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.http import HttpResponseForbidden, JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse, \
+    HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView, \
-    UpdateView, FormView
+    UpdateView, FormView, DeleteView
 
 from bookmarks.models import Row
 from books import forms
@@ -78,12 +79,14 @@ class PageDetailView(DetailView):
         return redirect(o)
 
 
-class AnnotationCreateView(FormView):
+class AnnotationCreateView(PermissionRequiredMixin, FormView):
+    permission_required = "books.add_annotation"
     form_class = forms.AnnotationCreateForm
     template_name = "books/annotation_form.html"
 
     def form_invalid(self, form):
-        return redirect(form.instance.page)
+        return HttpResponseBadRequest(form.errors.as_text(),
+                                      content_type="text/plain; charset=utf-8")
 
     def form_valid(self, form):
         form.instance.page = get_object_or_404(models.Page,
@@ -93,7 +96,8 @@ class AnnotationCreateView(FormView):
         return redirect(form.instance.page)
 
 
-class AnnotationUpdateView(UpdateView):
+class AnnotationUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = "books.change_annotation"
     model = models.Annotation
     fields = (
         'content',
@@ -106,13 +110,21 @@ class AnnotationUpdateView(UpdateView):
         return self.form_valid(form)
 
 
-class AnnotationUpdatePositionView(UpdateView):
+class AnnotationDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = "books.delete_annotation"
+    model = models.Annotation
+
+    def get_success_url(self):
+        return self.object.page.get_absolute_url()
+
+
+class AnnotationUpdatePositionView(PermissionRequiredMixin, UpdateView):
+    permission_required = "books.change_annotation"
+
     model = models.Annotation
     fields = (
-        'x0',
-        'y0',
-        'x1',
-        'y1',
+        'x',
+        'y',
     )
 
     def form_invalid(self, form):

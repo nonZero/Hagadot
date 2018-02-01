@@ -1,6 +1,6 @@
 {% load i18n bootstrap4 %}
 
-<button class="float-right btn btn-light btn-sm close"><span class="fa fa-close"></span></button>
+<button class="float-right btn btn-light btn-sm close-dialog"><span class="fa fa-close"></span></button>
 
 <h1>
     {% if object %}
@@ -16,7 +16,12 @@
     {% bootstrap_form form %}
     {% buttons %}
         <button class="btn btn-success"><span class="fa fa-save"
-                                              aria-hidden="true"></span> {% trans "Add" %}
+                                              aria-hidden="true"></span>     {% if object %}
+        {% trans "Save" %}
+    {% else %}
+        {% trans "Add" %}
+    {% endif %}
+
         </button>
 
 
