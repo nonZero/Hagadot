@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+    {% trans "Tracks" %}
+{% endblock %}
+
+{{ object }}
+{% block content %}
+
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item "><a
+                    href="{% url "audio:list" %}">{% trans "Tracks" %}</a></li>
+        </ol>
+    </nav>
+
+    {% if perms.audio.add_track %}
+        <a class="btn btn-success float-right"
+           href="{% url "audio:import" %}"><span class="fa fa-download"></span> {% trans "Import new track" %}</a>
+    {% endif %}
+
+    <h1>{% trans "Tracks" %}</h1>
+
+    <ul class="list-group">
+        {% for object in object_list %}
+            <li class="list-group-item">
+                <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                ({{ object.length_str }})
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+    {{ object }}
+{% endblock %}
+
+
+{% block content %}
+
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a
+                    href="{% url "audio:list" %}">{% trans "Audio" %}</a></li>
+            <li class="breadcrumb-item active"
+                aria-current="page">{{ object }}</li>
+        </ol>
+    </nav>
+    {% if perms.audio.change_track %}
+        <a class="btn btn-success float-right"
+           href="{% url "audio:update" object.id %}"><span
+                class="fa fa-pencil"></span> {% trans "Edit" %}</a>
+    {% endif %}
+    <h1>
+        {{ object }}
+        <small> ({{ object.length_str }})</small>
+    </h1>
+    {% if object.summary %}
+        {{ object.summary|linebreaks }}
+    {% endif %}
+    <audio controls="controls" preload="none" src="{{ object.audio_url }}"
+           style="width:100%"></audio>
+
+{% endblock %}

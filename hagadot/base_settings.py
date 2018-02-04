@@ -23,6 +23,7 @@ INSTALLED_APPS = [
 
     'books',
     'bookmarks',
+    'audio',
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n bootstrap4 %}
 <!doctype html>
 <html lang="he">
 <head>
@@ -41,6 +41,10 @@
                     <a class="nav-link"
                        href="{% url "bookmarks:list" %}">{% trans "Bookmarks" %}</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link"
+                       href="{% url "audio:list" %}">{% trans "Audio" %}</a>
+                </li>
                 {% if user.is_authenticated %}
                     <li>
                     <span class="navbar-text">
@@ -51,6 +55,7 @@
             </ul>
         </div>
     </nav>
+    {% bootstrap_messages %}
     {% block content %}
     {% endblock content %}
 </div>

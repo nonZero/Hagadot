@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n bootstrap4 %}
+
+{% block page_title %}
+    {% trans "Edit" %} {{ object }}
+{% endblock %}
+
+
+{% block content %}
+
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a
+                    href="{% url "audio:list" %}">{% trans "Audio" %}</a></li>
+            <li class="breadcrumb-item active"
+                aria-current="page">{{ object }}</li>
+            <li class="breadcrumb-item active"
+                aria-current="page">{% trans "Edit" %}</li>
+        </ol>
+    </nav>
+    <h1>{% trans "Edit" %} {{ object }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button class="btn btn-success"><span class="fa fa-save" aria-hidden="true"></span> {% trans "Save" %}</button>
+        {% endbuttons %}
+
+    </form>
+
+{% endblock %}
