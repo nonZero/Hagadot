@@ -17,9 +17,15 @@
         </ol>
     </nav>
     {% if perms.audio.change_track %}
-        <a class="btn btn-success float-right"
-           href="{% url "audio:update" object.id %}"><span
-                class="fa fa-pencil"></span> {% trans "Edit" %}</a>
+        <span class="float-right">
+            <a class="btn btn-success"
+               href="{% url "audio:update" object.id %}"><span
+                    class="fa fa-pencil"></span> {% trans "Edit" %}</a>
+            &nbsp;
+            <a class="btn btn-success"
+               href="{% url "audio:update_bookmarks" object.id %}"><span
+                    class="fa fa-bookmark"></span> {% trans "Edit Bookmarks" %}</a>
+        </span>
     {% endif %}
     <h1>
         {{ object }}
@@ -30,5 +36,14 @@
     {% endif %}
     <audio controls="controls" preload="none" src="{{ object.audio_url }}"
            style="width:100%"></audio>
+
+    <ul class="list-group">
+        {% for bm in object.bookmarks.all %}
+            <li class="list-group-item">
+                <a href="{{ bm.get_absolute_url }}">{{ bm }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
 
 {% endblock %}

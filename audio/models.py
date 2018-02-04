@@ -1,17 +1,23 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from mptt.fields import TreeManyToManyField
+
+from bookmarks.models import Bookmark
 
 
 class Track(models.Model):
     title = models.CharField(_("title"), max_length=300)
     audio_url = models.URLField(_("audio url"), unique=True)
     length = models.DecimalField(_("length"), max_digits=10, decimal_places=2,
-                                         help_text=_("in seconds"))
+                                 help_text=_("in seconds"))
     summary = models.TextField(_("summary"), null=True, blank=True)
     doc_id = models.CharField(_("NLI document ID"), max_length=100,
                               unique=True, null=True,
                               blank=True)
+
+    bookmarks = TreeManyToManyField(Bookmark, related_name='tracks',
+                                       blank=True)
 
     def __str__(self):
         return self.title

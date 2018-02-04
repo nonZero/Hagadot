@@ -9,4 +9,6 @@ urlpatterns = [
     path('import/', views.TrackImportView.as_view(), name='import'),
     path('<int:pk>/', views.TrackDetailView.as_view(), name='detail'),
     path('<int:pk>/edit/', views.TrackUpdateView.as_view(), name='update'),
+    path('<int:pk>/edit-bookmarks/', views.TrackUpdateBookmarksView.as_view(),
+         name='update_bookmarks'),
 ]

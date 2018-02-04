@@ -14,18 +14,41 @@
             </li>
             {% for parent in object.get_ancestors %}
                 <li class="breadcrumb-item"
-                    aria-current="page">{{ parent }}</li>
+                    aria-current="page"><a
+                        href="{{ parent.get_absolute_url }}">{{ parent }}</a>
+                </li>
             {% endfor %}
             <li class="breadcrumb-item active"
                 aria-current="page">{{ object }}</li>
         </ol>
     </nav>
     <h1>{{ object }}</h1>
+
+    <ul class="list-group">
+        {% for child in object.get_descendants.all %}
+            <li class="list-group-item">
+                <a href="{{ child.get_absolute_url }}">{{ child }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <ul class="list-group">
+        {% for track in object.tracks.all %}
+            <li class="list-group-item">
+                {{ track }}
+                <small> ({{ track.length_str }})</small>
+                <audio controls="controls" preload="none"
+                       src="{{ track.audio_url }}"
+                       style=""></audio>
+
+            </li>
+        {% endfor %}
+    </ul>
+
     <ul class="list-unstyled">
         {% for row in object.rows.all %}
-            <li>
+            <li title="{{ row.ordinal }}">
                 {{ row.content|safe }}
-                <span class="badge badge-pill badge-info">{{ row.ordinal }}</span>
             </li>
         {% endfor %}
     </ul>

@@ -66,3 +66,9 @@ class TrackUpdateView(PermissionRequiredMixin, UpdateView):
         'doc_id',
         'length',
     )
+
+class TrackUpdateBookmarksView(PermissionRequiredMixin, UpdateView):
+    permission_required = "audio.change_track"
+    model = models.Track
+    form_class = forms.TrackBookmarksForm
+

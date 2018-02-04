@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from audio.models import Track
 from bookmarks.models import Bookmark, Row
 from books.nli_api import get_img_url, get_thumb_url
 
@@ -68,6 +69,12 @@ class Page(models.Model):
 
     def next_page_url(self):
         return self.get_absolute_url(1)
+
+    def get_bookmarks(self):
+        return Bookmark.objects.filter(rows__in=self.rows.all())
+
+    def get_tracks(self):
+        return Track.objects.filter(bookmarks__in=self.get_bookmarks())
 
 
 class Annotation(models.Model):

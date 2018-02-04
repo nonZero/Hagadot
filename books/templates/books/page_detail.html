@@ -63,13 +63,15 @@
                     <div class="an"
                          data-url="{% url "books:update_ann_pos" an.id %}"
                          style="left:{{ an.x }}%; top:{{ an.y }}%;">
-                            <span class="fa fa-search fa-2x"></span>
+                        <span class="fa fa-search fa-2x"></span>
                         <div class="c" hidden>
                             {% if perms.books.delete_annotation %}
-                                <form action="{% url "books:delete_ann" an.id %}" method="post">
+                                <form action="{% url "books:delete_ann" an.id %}"
+                                      method="post">
                                     {% csrf_token %}
-                                <button class="btn btn-sm btn-danger float-right delete"><span
-                                        class="fa fa-trash"></span></button>
+                                    <button class="btn btn-sm btn-danger float-right delete"><span
+                                            class="fa fa-trash"></span>
+                                    </button>
                                 </form>
                             {% endif %}
                             <span class="float-right">&nbsp;</span>
@@ -93,6 +95,22 @@
                      data-url="{% url "books:create_ann" object.book.id object.ordinal %}"></div>
 
             </div>
+
+            <p></p>
+
+            <ul class="list-group">
+                {% for track in object.get_tracks %}
+                    <li class="list-group-item">
+                        {{ track }}
+                        <small> ({{ track.length_str }})</small>
+                        <audio controls="controls" preload="none"
+                               src="{{ track.audio_url }}"
+                               style=""></audio>
+
+                    </li>
+                {% endfor %}
+            </ul>
+
         </div>
 
         <div class="col-md-6">
@@ -142,7 +160,6 @@
                     <li class="list-group-item">
                         {{ row.content|safe }}
                     </li>
-
                 {% endfor %}
             {% endif %}
 
