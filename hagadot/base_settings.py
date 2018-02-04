@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'mptt',
     'bootstrap4',
 
+    'users',
     'books',
     'bookmarks',
     'audio',
@@ -117,3 +118,7 @@ DEFAULT_FROM_EMAIL = "no.relpy@nli.oglam.hasadna.org.il"
 SERVER_EMAIL = "admin@nli.oglam.hasadna.org.il"
 # Subject-line prefix. Make sure to include the trailing space.
 EMAIL_SUBJECT_PREFIX = "[oglam.nli] "
+
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+

@@ -16,6 +16,7 @@
     <link href="{% static "vendor/font-awesome/css/font-awesome.css" %}"
           rel="stylesheet">
     <link rel="stylesheet" href="{% static "style.css" %}"/>
+    <link rel="shortcut icon" href="{% static "favicon.png" %}"/>
 </head>
 <body>
 <div class="container">
@@ -45,25 +46,35 @@
                     <a class="nav-link"
                        href="{% url "audio:list" %}">{% trans "Audio" %}</a>
                 </li>
-                {% if user.is_authenticated %}
-                    <li>
-                    <span class="navbar-text">
-                        {{ user }}
-                    </span>
-                    </li>
-                {% endif %}
             </ul>
         </div>
     </nav>
     {% bootstrap_messages %}
     {% block content %}
     {% endblock content %}
+
+    <footer>
+        <hr>
+        <div class="card bg-light">
+            <div class="card-footer text-right">
+                {% if user.is_authenticated %}
+                    {{ user }}
+                    |
+                    <a href="{% url "logout" %}">{% trans "Logout" %}</a>
+                {% else %}
+                    <a href="{% url "login" %}">{% trans "Login" %}</a>
+                {% endif %}
+            </div>
+        </div>
+    </footer>
+
 </div>
 
 <script src="{% static "vendor/jquery-3.2.1.js" %}"></script>
 <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.js" %}"></script>
 {% block scripts %}
 {% endblock scripts %}
+
 
 </body>
 </html>
