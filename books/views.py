@@ -1,13 +1,20 @@
+import logging
+
+from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponseForbidden, JsonResponse, \
     HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView, TemplateView, \
     UpdateView, FormView, DeleteView
 
 from bookmarks.models import Row
 from books import forms
+from books.importer import import_book
 from . import models
+
+logger = logging.getLogger(__name__)
 
 
 class HomeView(TemplateView):
@@ -20,6 +27,24 @@ class BookListView(ListView):
 
 class BookDetailView(DetailView):
     model = models.Book
+
+
+class BookImportView(PermissionRequiredMixin, FormView):
+    permission_required = "books.add_book"
+    form_class = forms.BookImportForm
+    template_name = "books/book_import.html"
+
+    def form_valid(self, form):
+        try:
+            b = import_book(form.cleaned_data['doc_id'])
+        except Exception as e:
+            logger.exception(str(e))
+            form.add_error('doc_id', str(e))
+            return self.form_invalid(form)
+
+        messages.success(self.request, _("Book imported successfully"))
+
+        return redirect(b)
 
 
 class BookUpdateView(PermissionRequiredMixin, UpdateView):

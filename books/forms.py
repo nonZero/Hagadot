@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from . import models
 
@@ -28,3 +29,12 @@ class AnnotationCreateForm(forms.ModelForm):
             'x': forms.HiddenInput(),
             'y': forms.HiddenInput(),
         }
+
+
+class BookImportForm(forms.Form):
+    doc_id = forms.CharField(
+        max_length=100, validators=[
+            RegexValidator(r'^[-\w]+$')
+        ],
+        help_text=_("For example: PNX_MANUSCRIPTS000041667-2")
+    )
