@@ -39,6 +39,7 @@ class BookForm(forms.ModelForm):
         fields = (
             'title',
             'summary',
+            'short_summary',
             'start_page',
             'end_page',
         )

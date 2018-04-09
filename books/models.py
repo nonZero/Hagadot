@@ -12,6 +12,8 @@ class Book(models.Model):
     slug = models.CharField(max_length=100, unique=True)
     doc_id = models.CharField(max_length=100, unique=True)
     summary = models.TextField(_("summary"), null=True, blank=True)
+    short_summary = models.CharField(_("short summary"), max_length=400,
+                                     null=True, blank=True)
 
     num_pages = models.PositiveIntegerField(null=True)
 

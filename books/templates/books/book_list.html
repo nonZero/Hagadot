@@ -15,10 +15,12 @@
         </ol>
     </nav>
 
-    
+
     {% if perms.books.add_book %}
         <a class="btn btn-success float-right"
-           href="{% url "books:import" %}"><span class="fa fa-download"></span> {% trans "Import new book" %}</a>
+           href="{% url "books:import" %}"><span
+                class="fa fa-download"></span> {% trans "Import new book" %}
+        </a>
     {% endif %}
 
     <h1>{% trans "Books" %}</h1>
@@ -27,6 +29,9 @@
         {% for object in object_list %}
             <li class="list-group-item">
                 <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                {% if object.short_summary %}
+                    | <i>{{ object.short_summary }}</i>
+                {% endif %}
                 ({{ object.num_pages }})
             </li>
         {% endfor %}
