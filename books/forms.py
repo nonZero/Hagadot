@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
+
 from . import models
 
 
@@ -30,6 +31,39 @@ class AnnotationCreateForm(forms.ModelForm):
             'x': forms.HiddenInput(),
             'y': forms.HiddenInput(),
         }
+
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = models.Book
+        fields = (
+            'title',
+            'summary',
+            'start_page',
+            'end_page',
+        )
+
+    def clean_start_page(self):
+        v = self.cleaned_data['start_page']
+        if v > self.instance.num_pages:
+            raise ValidationError(
+                _("Start page must be smaller than total pages."))
+        return v
+
+    def clean_end_page(self):
+        v = self.cleaned_data['end_page']
+        if v > self.instance.num_pages:
+            raise ValidationError(
+                _("End page must be smaller than total pages."))
+        return v
+
+    def clean(self):
+        data = super().clean()
+        if 'start_page' in data and 'end_page' in data and data['start_page'] > \
+                data['end_page']:
+            raise ValidationError(_("Start page must be smaller than end page."))
+
+        return data
 
 
 class BookImportForm(forms.Form):

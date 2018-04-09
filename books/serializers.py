@@ -51,7 +51,7 @@ class BookSerializer(serializers.ModelSerializer):
             'doc_id',
             'summary',
             'num_pages',
-            # 'start_page',
-            # 'end_page'
+            'start_page',
+            'end_page',
             'pages',
         )

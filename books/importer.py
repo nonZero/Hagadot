@@ -18,6 +18,8 @@ def import_book(doc_id):
             slug=doc_id,
             doc_id=doc_id,
             num_pages=len(pages),
+            start_page=1,
+            end_page=len(pages),
         )
         for p in pages:
             b.pages.create(

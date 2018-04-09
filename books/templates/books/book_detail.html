@@ -46,7 +46,7 @@
                 {% for p in object.pages.all %}
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
 
-                        <div class="card">
+                        <div class="card {% if p.ordinal < object.start_page or p.ordinal > p.end_page %}blurred{% endif %}">
 
                             <a href="{{ p.get_absolute_url }}"><img
                                     class="card-img-top"

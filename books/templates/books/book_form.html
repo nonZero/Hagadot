@@ -19,11 +19,21 @@
         </ol>
     </nav>
     <h1>{% trans "Edit" %} {{ object }}</h1>
+    <ul>
+        <li>
+            {% trans "Doc ID" %}: {{ object.doc_id }}
+        </li>
+        <li>
+            {% trans "Number of pages" %}: {{ object.num_pages }}
+        </li>
+    </ul>
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button class="btn btn-success"><span class="fa fa-save" aria-hidden="true"></span> {% trans "Save" %}</button>
+            <button class="btn btn-success"><span class="fa fa-save"
+                                                  aria-hidden="true"></span> {% trans "Save" %}
+            </button>
         {% endbuttons %}
 
     </form>

@@ -7,6 +7,10 @@ dialog {
     min-width: 61%;
 }
 
+.blurred {
+    opacity: 0.5;
+}
+
 .page-img {
     display: inline-block;
     position: relative;

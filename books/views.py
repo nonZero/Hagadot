@@ -60,10 +60,7 @@ class BookImportView(PermissionRequiredMixin, FormView):
 class BookUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = "books.change_book"
     model = models.Book
-    fields = (
-        'title',
-        'summary',
-    )
+    form_class = forms.BookForm
 
 
 class PageDetailView(DetailView):
