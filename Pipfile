@@ -1,21 +1,17 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
-django = "*"
+Django = "*"
 django-extensions = "*"
 ipython = "*"
 requests = "*"
 django-mptt = "*"
-"psycopg2" = "*"
 "django-bootstrap4" = "*"
-
+djangorestframework = "*"
+"psycopg2-binary" = "*"
 
 [dev-packages]
-
-"fabric3" = "*"
+"Fabric3" = "*"

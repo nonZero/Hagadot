@@ -6,12 +6,15 @@ from django.http import HttpResponseForbidden, JsonResponse, \
     HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
+from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, \
     UpdateView, FormView, DeleteView
 
 from bookmarks.models import Row
 from books import forms
 from books.importer import import_book
+from books.serializers import BookSerializer
+from hagadot.base_views import AllowCORSMixin
 from . import models
 
 logger = logging.getLogger(__name__)
@@ -23,6 +26,13 @@ class HomeView(TemplateView):
 
 class BookListView(ListView):
     model = models.Book
+
+
+class BookJsonListView(AllowCORSMixin, View):
+    def get(self, request):
+        qs = models.Book.objects.all()
+        serializer = BookSerializer(qs, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 class BookDetailView(DetailView):

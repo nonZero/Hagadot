@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'mptt',
     'bootstrap4',
+    'rest_framework',
 
     'users',
     'books',

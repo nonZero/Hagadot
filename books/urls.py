@@ -5,6 +5,7 @@ app_name = 'books'
 
 urlpatterns = [
     path('', views.BookListView.as_view(), name='list'),
+    path('json/', views.BookJsonListView.as_view(), name='list_json'),
     path('import/', views.BookImportView.as_view(), name='import'),
     path('<int:pk>/', views.BookDetailView.as_view(), name='detail'),
     path('<int:pk>/edit/', views.BookUpdateView.as_view(), name='update'),
