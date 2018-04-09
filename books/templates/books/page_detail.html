@@ -63,7 +63,7 @@
                     <div class="an"
                          data-url="{% url "books:update_ann_pos" an.id %}"
                          style="left:{{ an.x }}%; top:{{ an.y }}%;">
-                        <span class="fa fa-search fa-2x"></span>
+                        <span class="fa {{ an.track|yesno:'fa-music,fa-search' }} fa-2x"></span>
                         <div class="c" hidden>
                             {% if perms.books.delete_annotation %}
                                 <form action="{% url "books:delete_ann" an.id %}"
@@ -81,6 +81,15 @@
                                         class="fa fa-pencil"></span></a>
                             {% endif %}
                             {{ an.content|linebreaks }}
+                            {% if an.track %}
+                                <p>
+                                    {{ an.track }}
+                                    <small> ({{ an.track.length_str }})</small>
+                                    <audio controls="controls" preload="none"
+                                           src="{{ an.track.audio_url }}"
+                                           style=""></audio>
+                                </p>
+                            {% endif %}
 
                             <a href="#"
                                class="btn btn-primary close-dialog">{% trans "Close" %}</a>

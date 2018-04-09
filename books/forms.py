@@ -23,6 +23,7 @@ class AnnotationCreateForm(forms.ModelForm):
         fields = (
             'x',
             'y',
+            'track',
             'content',
         )
         widgets = {

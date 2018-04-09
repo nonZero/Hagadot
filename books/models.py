@@ -21,6 +21,9 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('books:detail', args=[str(self.id)])
 
+    def annotations(self):
+        return Annotation.objects.filter(page__book=self)
+
 
 class Page(models.Model):
     THUMB_HEIGHT = 100
@@ -82,6 +85,9 @@ class Annotation(models.Model):
                              related_name='annotations')
     x = models.DecimalField(max_digits=5, decimal_places=1)
     y = models.DecimalField(max_digits=5, decimal_places=1)
+    track = models.ForeignKey(Track, null=True, blank=True,
+                              on_delete=models.CASCADE,
+                              related_name="annotations")
     content = models.TextField(_("content"))
 
     def __str__(self):

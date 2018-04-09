@@ -125,6 +125,7 @@ class AnnotationUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = "books.change_annotation"
     model = models.Annotation
     fields = (
+        'track',
         'content',
     )
 
