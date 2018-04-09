@@ -133,7 +133,8 @@ class AnnotationUpdateView(PermissionRequiredMixin, UpdateView):
         return self.object.page.get_absolute_url()
 
     def form_invalid(self, form):
-        return self.form_valid(form)
+        messages.error(self.request, _("Form Error!"))
+        return redirect(self.get_success_url())
 
 
 class AnnotationDeleteView(PermissionRequiredMixin, DeleteView):

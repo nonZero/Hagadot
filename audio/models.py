@@ -17,7 +17,11 @@ class Track(models.Model):
                               blank=True)
 
     bookmarks = TreeManyToManyField(Bookmark, related_name='tracks',
-                                       blank=True)
+                                    blank=True)
+
+    class Meta:
+        verbose_name = _("track")
+        verbose_name_plural = _("tracks")
 
     def __str__(self):
         return self.title

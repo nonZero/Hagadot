@@ -26,18 +26,21 @@
         {{ object.summary|linebreaks }}
     {% endif %}
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <ul class="list-group">
                 {% for a in object.annotations %}
                     <li class="list-group-item">
                         <span class="fa {{ a.track|yesno:'fa-music,fa-search' }}"></span>
                         <a href="{{ a.page.get_absolute_url }}">{% trans "Page" %} {{ a.page.ordinal }}</a>
+                        {% if a.track %}
+                            {{ a.track }}
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ul>
 
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
             <div class="row">
 
                 {% for p in object.pages.all %}

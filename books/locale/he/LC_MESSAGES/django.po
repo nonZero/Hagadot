@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-04 15:12+0200\n"
-"PO-Revision-Date: 2018-02-04 15:12+0200\n"
+"POT-Creation-Date: 2018-04-09 23:57+0300\n"
+"PO-Revision-Date: 2018-04-09 23:57+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -78,11 +78,11 @@ msgstr "הוספה"
 msgid "Edit"
 msgstr "עריכה"
 
-msgid "Import new book"
-msgstr "יבוא ספר חדש"
-
 msgid "Page"
 msgstr "עמוד"
+
+msgid "Import new book"
+msgstr "יבוא ספר חדש"
 
 msgid "Close"
 msgstr "סגירה"
@@ -95,3 +95,6 @@ msgstr "סוף"
 
 msgid "Book imported successfully"
 msgstr "הספר יובא בהצלחה"
+
+msgid "Form Error!"
+msgstr "שגיאה בטופס!"

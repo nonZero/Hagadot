@@ -112,7 +112,7 @@ $(function () {
         const dy = e.pageY - dragY;
 
         // Check drag move threshold:
-        isDragging = isDragging | Math.abs(dx) + Math.abs(dy) > 10;
+        isDragging = isDragging || Math.abs(dx) + Math.abs(dy) > 10;
         if (isDragging) {
             const left = Math.min(Math.max(0, pos.left + dx), pageImg.width());
             const top = Math.min(Math.max(0, pos.top + dy), pageImg.height());
