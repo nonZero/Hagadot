@@ -17,8 +17,8 @@ class Book(models.Model):
 
     num_pages = models.PositiveIntegerField(null=True)
 
-    start_page = models.PositiveIntegerField(null=True)
-    end_page = models.PositiveIntegerField(null=True)
+    start_page = models.PositiveIntegerField(_("start page"), null=True)
+    end_page = models.PositiveIntegerField(_("end page"), null=True)
 
     def __str__(self):
         return self.title

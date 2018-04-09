@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-10 01:12+0300\n"
-"PO-Revision-Date: 2018-04-10 01:14+0300\n"
+"POT-Creation-Date: 2018-04-10 01:36+0300\n"
+"PO-Revision-Date: 2018-04-10 01:36+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -38,6 +38,15 @@ msgstr "כותרת"
 
 msgid "summary"
 msgstr "סיכום"
+
+msgid "short summary"
+msgstr "תיאור קצרצר"
+
+msgid "start page"
+msgstr "עמוד ראשון"
+
+msgid "end page"
+msgstr "עמוד אחרון"
 
 msgid "content"
 msgstr "תוכן"
