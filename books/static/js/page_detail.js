@@ -47,10 +47,10 @@ $(function () {
             return false;
         });
         modal.on('cancel', (e) => {
-            modal.hide().get(0).close();
+            modal.hide().html("").get(0).close();
         });
         modal.on('click', '.close-dialog', () => {
-            modal.hide().get(0).close();
+            modal.hide().html("").get(0).close();
             return false;
         });
         modal.on('click', '.delete', () => {
