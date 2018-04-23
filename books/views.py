@@ -31,7 +31,8 @@ class BookListView(ListView):
 class BookJsonListView(AllowCORSMixin, View):
     def get(self, request):
         qs = models.Book.objects.all()
-        serializer = BookSerializer(qs, many=True)
+        serializer = BookSerializer(qs, many=True,
+                                    context={"request": request})
         return JsonResponse(serializer.data, safe=False)
 
 

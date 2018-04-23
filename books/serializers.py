@@ -43,6 +43,7 @@ class PageSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     pages = PageSerializer(many=True)
+    cover_image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Book
@@ -55,4 +56,10 @@ class BookSerializer(serializers.ModelSerializer):
             'start_page',
             'end_page',
             'pages',
+            'cover_image_url',
         )
+
+    def get_cover_image_url(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(
+            obj.cover_image.url) if obj.cover_image else None
