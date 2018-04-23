@@ -8,7 +8,7 @@ from bookmarks.models import Bookmark
 
 class Track(models.Model):
     title = models.CharField(_("title"), max_length=300)
-    audio_url = models.URLField(_("audio url"), unique=True)
+    audio_url = models.URLField(_("audio url"), unique=True, max_length=600)
     length = models.DecimalField(_("length"), max_digits=10, decimal_places=2,
                                  help_text=_("in seconds"))
     summary = models.TextField(_("summary"), null=True, blank=True)

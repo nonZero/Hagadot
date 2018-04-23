@@ -32,7 +32,7 @@ class TrackImportView(PermissionRequiredMixin, FormView):
             return self.form_invalid(form)
         t, created = Track.objects.get_or_create(
             audio_url=info['url'], defaults=dict(
-                title=info['title'],
+                title=info['title'][:300],
                 length=info['length'],
                 summary=strip_tags(info['description']),
             )
