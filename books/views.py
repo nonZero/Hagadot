@@ -14,7 +14,7 @@ from bookmarks.models import Row
 from books import forms
 from books.importer import import_book
 from books.serializers import BookSerializer
-from hagadot.base_views import AllowCORSMixin
+from hagadot.base_views import AllowCORSMixin, SimpleJsonView
 from . import models
 
 logger = logging.getLogger(__name__)
@@ -28,12 +28,12 @@ class BookListView(ListView):
     model = models.Book
 
 
-class BookJsonListView(AllowCORSMixin, View):
-    def get(self, request):
+class BookJsonListView(SimpleJsonView):
+    def get_data(self):
         qs = models.Book.objects.all()
         serializer = BookSerializer(qs, many=True,
-                                    context={"request": request})
-        return JsonResponse(serializer.data, safe=False)
+                                    context={"request": self.request})
+        return(serializer.data)
 
 
 class BookDetailView(DetailView):

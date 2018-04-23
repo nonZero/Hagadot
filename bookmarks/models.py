@@ -26,6 +26,20 @@ class Bookmark(MPTTModel):
     def get_absolute_url(self):
         return reverse('bookmarks:detail', args=[str(self.id)])
 
+    def walk(self):
+        for c in self.get_children():
+            d = {
+                'title': c.title,
+                'ordinal': c.title,
+            }
+            l = list(c.walk())
+            if l:
+                d['children'] = l
+            l = list(c.rows.values_list('ordinal', flat=True))
+            if l:
+                d['rows'] = l
+            yield d
+
 
 class Row(models.Model):
     bookmark = models.ForeignKey(Bookmark, on_delete=models.CASCADE,

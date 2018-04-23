@@ -1,7 +1,8 @@
 import functools
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
+from django.views import View
 
 
 def allow_cors(f):
@@ -25,3 +26,9 @@ class AllowCORSMixin(object):
 
     def options(self, request, *args, **kwargs):
         return HttpResponse()
+
+
+class SimpleJsonView(AllowCORSMixin, View):
+    def get(self, request):
+        data = self.get_data()
+        return JsonResponse(data, safe=False)
