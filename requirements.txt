@@ -1,25 +1,26 @@
 backcall==0.1.0
-certifi==2018.1.18
+certifi==2018.4.16
 chardet==3.0.4
-decorator==4.2.1
+decorator==4.3.0
 django-bootstrap4==0.0.6
-django-extensions==2.0.6
-django-js-asset==1.0.0
+django-extensions==2.0.7
+django-js-asset==1.1.0
 django-mptt==0.9.0
 django==2.0.4
 djangorestframework==3.8.2
 idna==2.6
 ipython-genutils==0.2.0
 ipython==6.3.1
-jedi==0.11.1
-parso==0.1.1
-pexpect==4.4.0; sys_platform != 'win32'
+jedi==0.12.0
+parso==0.2.0
+pexpect==4.5.0; sys_platform != 'win32'
 pickleshare==0.7.4
+pillow==5.1.0
 prompt-toolkit==1.0.15
 psycopg2-binary==2.7.4
 ptyprocess==0.5.2
 pygments==2.2.0
-pytz==2018.3
+pytz==2018.4
 requests==2.18.4
 simplegeneric==0.8.1
 six==1.11.0
