@@ -20,6 +20,8 @@ class Book(models.Model):
     start_page = models.PositiveIntegerField(_("start page"), null=True)
     end_page = models.PositiveIntegerField(_("end page"), null=True)
 
+    cover_image = models.ImageField(_("cover image"), null=True, blank=True)
+
     def __str__(self):
         return self.title
 

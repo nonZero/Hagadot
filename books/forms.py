@@ -42,6 +42,7 @@ class BookForm(forms.ModelForm):
             'short_summary',
             'start_page',
             'end_page',
+            'cover_image',
         )
 
     def clean_start_page(self):

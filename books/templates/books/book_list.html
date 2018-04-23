@@ -28,6 +28,9 @@
     <ul class="list-group">
         {% for object in object_list %}
             <li class="list-group-item">
+                {% if object.cover_image %}
+                    <img src="{{ object.cover_image.url }}" class="pull-left" height="80">
+                {% endif %}
                 <a href="{{ object.get_absolute_url }}">{{ object }}</a>
                 {% if object.short_summary %}
                     | <i>{{ object.short_summary }}</i>

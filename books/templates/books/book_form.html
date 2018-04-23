@@ -27,7 +27,7 @@
             {% trans "Number of pages" %}: {{ object.num_pages }}
         </li>
     </ul>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
