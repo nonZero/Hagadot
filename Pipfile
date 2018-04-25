@@ -12,7 +12,7 @@ django-mptt = "*"
 "django-bootstrap4" = "*"
 djangorestframework = "*"
 "psycopg2-binary" = "*"
-pillow = "*"
+Pillow = "*"
 
 [dev-packages]
 "Fabric3" = "*"

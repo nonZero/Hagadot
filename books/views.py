@@ -6,7 +6,6 @@ from django.http import HttpResponseForbidden, JsonResponse, \
     HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
-from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, \
     UpdateView, FormView, DeleteView
 
@@ -14,7 +13,7 @@ from bookmarks.models import Row
 from books import forms
 from books.importer import import_book
 from books.serializers import BookSerializer
-from hagadot.base_views import AllowCORSMixin, SimpleJsonView
+from hagadot.base_views import SimpleJsonView
 from . import models
 
 logger = logging.getLogger(__name__)
@@ -33,7 +32,7 @@ class BookJsonListView(SimpleJsonView):
         qs = models.Book.objects.all()
         serializer = BookSerializer(qs, many=True,
                                     context={"request": self.request})
-        return(serializer.data)
+        return serializer.data
 
 
 class BookDetailView(DetailView):
