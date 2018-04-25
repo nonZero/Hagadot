@@ -15,7 +15,7 @@ $(function () {
         if (!startEl.length || !endEl.length) {
             return false;
         }
-        return startEl.val() <= endEl.val();
+        return Number(startEl.val()) <= Number(endEl.val());
     };
 
     const refresh = () => {
