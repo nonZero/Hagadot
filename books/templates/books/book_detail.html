@@ -47,7 +47,13 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
 
                         <div class="card {% if p.ordinal < object.start_page or p.ordinal > object.end_page %}blurred{% endif %}">
+                            {% if p.rows.count %}
 
+                                <div class="page-rows-icon" title="{{ p.rows.count }} {% trans " lines " %}
+{{ p.get_bookmarks_str }}">
+                                    <span class="fa fa-list"></span>
+                                </div>
+                            {% endif %}
                             <a href="{{ p.get_absolute_url }}"><img
                                     class="card-img-top"
                                     src="{{ p.thumb_url }}"

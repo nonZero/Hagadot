@@ -83,6 +83,9 @@ class Page(models.Model):
     def get_bookmarks(self):
         return Bookmark.objects.filter(rows__in=self.rows.all())
 
+    def get_bookmarks_str(self):
+        return "\n".join(str(bm) for bm in set(self.get_bookmarks()))
+
     def get_tracks(self):
         return Track.objects.filter(bookmarks__in=self.get_bookmarks())
 
