@@ -38,6 +38,8 @@ class PageSerializer(serializers.ModelSerializer):
             'ordinal',
             'rows',
             'annotations',
+            'width',
+            'height',
         )
 
 
