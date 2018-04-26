@@ -51,6 +51,8 @@ class BookSerializer(serializers.ModelSerializer):
         model = models.Book
         fields = (
             'id',
+            'title',
+            'slug',
             'doc_id',
             'summary',
             'short_summary',
