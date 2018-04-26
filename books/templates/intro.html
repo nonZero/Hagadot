@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n mptt_tags %}
+
+{% block page_title %}
+    {% trans "Intro" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h1 class="display-4">
+            ברוכים הבאים!
+        </h1>
+        <p class="lead">
+אתר זה נמצא בבניה...
+        </p>
+        <hr class="my-4">
+        <a class="btn btn-primary btn-lg" href="/app/" role="button">לצפיה בהגדות לחצו כאן</a>
+    </div>
+
+{% endblock %}

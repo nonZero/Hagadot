@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
-from books.views import HomeView
+from books.views import HomeView, IntroView
 
 manage_urls = [
     path('', HomeView.as_view(), name="home"),
@@ -17,7 +17,8 @@ manage_urls = [
 
 urlpatterns = [
     # path('', RedirectView.as_view(url='/app/')),
-    path('', RedirectView.as_view(pattern_name='home')),
+    # path('', RedirectView.as_view(pattern_name='home')),
+    path('', IntroView.as_view()),
     path('editors/', include(manage_urls))
 ]
 if settings.DEBUG:

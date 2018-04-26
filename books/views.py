@@ -19,6 +19,10 @@ from . import models
 logger = logging.getLogger(__name__)
 
 
+class IntroView(TemplateView):
+    template_name = "intro.html"
+
+
 class HomeView(TemplateView):
     template_name = "home.html"
 
